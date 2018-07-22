@@ -1,0 +1,36 @@
+{
+    "bridge": {
+        "name": "iHome",
+        "username": "CC:22:3D:E3:CE:30",
+        "port": 51826,
+        "pin": "031-45-154"
+    },
+    "description":"This is configuration file by akarazeev",
+    "accessories":[{
+        "accessory": "TemperatureFile",
+        "name": "Temperature-sensor",
+        "description": "The temperature of Raspberry Pi",
+        "file_path": "temp.txt"
+    }],
+    "platforms":[{
+        "platform":"cmdSwitch2",
+        "switches":[{
+            "name":"Left lamp",
+            "on_cmd":"python3 ~/WD/home_automation/switcher.py -d llamp -t",
+            "off_cmd":"python3 ~/WD/home_automation/switcher.py -d llamp -f",
+            "state_cmd":"python3 ~/WD/home_automation/switcher.py -d llamp -s"
+        },
+        {
+            "name":"Right lamp",
+            "on_cmd":"python3 ~/WD/home_automation/switcher.py -d rlamp -t",
+            "off_cmd":"python3 ~/WD/home_automation/switcher.py -d rlamp -f",
+            "state_cmd":"python3 ~/WD/home_automation/switcher.py -d rlamp -s"
+        },
+        {
+            "name":"Fan",
+            "on_cmd":"python3 ~/WD/home_automation/switcher.py -d fan -t",
+            "off_cmd":"python3 ~/WD/home_automation/switcher.py -d fan -f",
+            "state_cmd":"python3 ~/WD/home_automation/switcher.py -d fan -s"
+        }]
+    }]
+}
