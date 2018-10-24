@@ -1,4 +1,5 @@
 .idea/
 token.json
 __pycache__/
+res/temp.txt
 *.DS_Store
