@@ -2,4 +2,5 @@
 token.json
 __pycache__/
 res/temp.txt
+res/relays.pkl
 *.DS_Store
