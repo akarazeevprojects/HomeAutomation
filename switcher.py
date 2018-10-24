@@ -60,8 +60,8 @@ def build_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument("-v", "--verbose", help="increase output verbosity", action="store_true")
     parser.add_argument("-d", "--device", help="device id")
-    parser.add_argument("-t", "--on", help="switch on device", action="store_true")
-    parser.add_argument("-f", "--off", help="switch off device", action="store_true")
+    parser.add_argument("-on", "--on", help="switch on device", action="store_true")
+    parser.add_argument("-off", "--off", help="switch off device", action="store_true")
     parser.add_argument("-s", "--status", help="status of device", action="store_true")
     return parser
 

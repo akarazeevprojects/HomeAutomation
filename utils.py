@@ -91,8 +91,10 @@ def main():
     # aliases = list(switcher.gpio_mapping.keys())
     # print(aliases)
 
-    state = compose_state()
-    print(state)
+    # state = compose_state()
+    # print(state)
+
+    generate_config()
 
 
 if __name__ == '__main__':

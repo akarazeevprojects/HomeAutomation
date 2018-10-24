@@ -5,6 +5,7 @@ import json
 import re
 
 import utils
+import system
 
 # Enable logging.
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - \
@@ -15,7 +16,7 @@ logger.setLevel(logging.DEBUG)
 
 
 def get_token():
-    with open('token.json') as jsn:
+    with open(system.TGTOKEN_PATH) as jsn:
         data = json.load(jsn)
     return data['token']
 
@@ -35,13 +36,15 @@ def start(bot, update):
 
 @general
 def text_handler(bot, update):
+    username = str(update.message.from_user.username)
+    print(username)
     pass
 
 
 @general
 def command_handler(bot, update):
     text = update.message.text
-    alias = re.sub(r'{}*'.format(utils.SWITCH), '', text)
+    alias = re.sub(r'{}*'.format(system.SWITCH), '', text)
     # Switch `alias` device.
     utils.switch(alias)
 

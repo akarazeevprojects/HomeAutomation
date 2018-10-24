@@ -1,0 +1,11 @@
+{
+    "bridge": {
+        "name": "iHome",
+        "username": "CC:21:3D:E3:CE:30",
+        "port": 51816,
+        "pin": "031-46-154"
+    },
+    "description":"This is configuration file by akarazeev",
+    "accessories":[],
+    "platforms":[]
+}
