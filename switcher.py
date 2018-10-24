@@ -8,6 +8,21 @@ import logging
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
+alias_mapping = {
+    'Fan': 'fan',
+    'Right lamp': 'rlamp',
+    'Left lamp': 'llamp',
+    'Neon': 'neon'
+}
+
+gpio_mapping = {
+    'fan': 12,
+    'rlamp': 16,
+    'llamp': 20,
+    'neon': 21
+}
+relays = None
+
 parser = argparse.ArgumentParser()
 parser.add_argument("-v", "--verbose", help="increase output verbosity",
                     action="store_true")
@@ -29,20 +44,14 @@ else:
 dir_path = os.path.dirname(os.path.realpath(__file__))
 relays_file = 'relays.pkl'
 relays_path = os.path.join(dir_path, relays_file)
-gpio_mapping = {
-    'fan': 12,
-    'rlamp': 16,
-    'llamp': 20
-}
-relays = None
 
 if os.path.exists(relays_path) is False:
+    pins = list(gpio_mapping.values())
+    zeros = [0] * len(pins)
+
     # {gpio: state}.
-    relays = {
-        12: 0,
-        16: 0,
-        20: 0
-    }
+    relays = dict(zip(pins, zeros))
+
     with open(relays_path, 'wb') as f:
         pickle.dump(relays, f)
 else:

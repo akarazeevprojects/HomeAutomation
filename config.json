@@ -1,9 +1,9 @@
 {
     "bridge": {
         "name": "iHome",
-        "username": "CC:22:3D:E3:CE:30",
-        "port": 51826,
-        "pin": "031-45-154"
+        "username": "CC:21:3D:E3:CE:30",
+        "port": 51816,
+        "pin": "031-46-154"
     },
     "description":"This is configuration file by akarazeev",
     "accessories":[{
@@ -31,6 +31,12 @@
             "on_cmd":"python3 ~/WD/home_automation/switcher.py -d fan -t",
             "off_cmd":"python3 ~/WD/home_automation/switcher.py -d fan -f",
             "state_cmd":"python3 ~/WD/home_automation/switcher.py -d fan -s"
-        }]
+        },
+	{
+            "name":"Neon",
+            "on_cmd":"python3 ~/WD/home_automation/switcher.py -d neon -t",
+            "off_cmd":"python3 ~/WD/home_automation/switcher.py -d neon -f",
+            "state_cmd":"python3 ~/WD/home_automation/switcher.py -d neon -s"
+	}]
     }]
 }
