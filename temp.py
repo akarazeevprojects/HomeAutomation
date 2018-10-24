@@ -1,10 +1,19 @@
 import subprocess
 import time
+import os
+
+import system
 
 while True:
     p = subprocess.Popen(['vcgencmd', 'measure_temp'], stdout=subprocess.PIPE)
-    (output, err) = p.communicate()
-    output = str(output)[7:-5]
-    with open('temp.txt', 'w') as f:
-        f.write(output)
+    out, err = p.communicate()
+    out = str(out)[7:-5]
+
+    if os.path.exists(system.TEMPERATURE_PATH):
+        with open(system.TEMPERATURE_PATH, 'w') as f:
+            f.write(out)
+    else:
+        with open(system.TEMPERATURE_PATH, 'a') as f:
+            f.write(out)
+
     time.sleep(5)

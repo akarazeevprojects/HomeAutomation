@@ -1,3 +1,4 @@
 .idea/
 token.json
 __pycache__/
+*.DS_Store

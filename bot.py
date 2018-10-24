@@ -1,4 +1,4 @@
-from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import telegram
 import logging
 import json
@@ -13,8 +13,6 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - \
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
-users_locations = dict()
-
 
 def get_token():
     with open('token.json') as jsn:
@@ -22,27 +20,30 @@ def get_token():
     return data['token']
 
 
+def general(func):
+    def wrapper(bot, update):
+        func(bot, update)
+        composed_answer = utils.compose_state()
+        update.message.reply_text(composed_answer, parse_mode=telegram.ParseMode.MARKDOWN)
+    return wrapper
+
+
+@general
 def start(bot, update):
     update.message.reply_text('Hi!')
 
-    composed_answer = utils.compose_state()
-    update.message.reply_text(composed_answer, parse_mode=telegram.ParseMode.MARKDOWN)
 
-
+@general
 def text_handler(bot, update):
-    composed_answer = utils.compose_state()
-    update.message.reply_text(composed_answer, parse_mode=telegram.ParseMode.MARKDOWN)
+    pass
 
 
+@general
 def command_handler(bot, update):
     text = update.message.text
     alias = re.sub(r'{}*'.format(utils.SWITCH), '', text)
-
     # Switch `alias` device.
     utils.switch(alias)
-
-    composed_answer = utils.compose_state()
-    update.message.reply_text(composed_answer, parse_mode=telegram.ParseMode.MARKDOWN)
 
 
 def run():
