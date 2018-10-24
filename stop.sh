@@ -1,3 +1,4 @@
 #!/bin/sh
-screen -S tempdumper -X quit
-screen -S smarthome -X quit
+screen -S home -X quit
+screen -S temp -X quit
+screen -S tg -X quit
