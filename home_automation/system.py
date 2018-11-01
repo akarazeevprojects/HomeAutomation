@@ -1,10 +1,10 @@
-TEMPERATURE_PATH = '/home/pi/WD/home_automation/res/temp.txt'
-RELAYS_PATH = '/home/pi/WD/home_automation/res/relays.pkl'
-SWITCHER_PATH = '/home/pi/WD/home_automation/home_automation/switcher.py'
-TGTOKEN_PATH = '/home/pi/WD/home_automation/res/token.json'
+TEMPERATURE_PATH = '/home/pi/HomeAutomation/res/temp.txt'
+RELAYS_PATH = '/home/pi/HomeAutomation/res/relays.pkl'
+SWITCHER_PATH = '/home/pi/HomeAutomation/home_automation/switcher.py'
+TGTOKEN_PATH = '/home/pi/HomeAutomation/res/token.json'
 
-NEWCONFIG_PATH = '/home/pi/WD/home_automation/res/newconfig.json'
-TEMPLATECONFIG_PATH = '/home/pi/WD/home_automation/res/template_config.json'
+NEWCONFIG_PATH = '/home/pi/HomeAutomation/res/newconfig.json'
+TEMPLATECONFIG_PATH = '/home/pi/HomeAutomation/res/template_config.json'
 CONFIG_PATH = '/home/pi/.homebridge/config.json'
 
 RELAYS_FILE = 'relays.pkl'

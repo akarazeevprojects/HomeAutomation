@@ -3,7 +3,7 @@
         {
             "accessory": "TemperatureFile",
             "description": "The temperature of Raspberry Pi",
-            "file_path": "/home/pi/WD/home_automation/res/temp.txt",
+            "file_path": "/home/pi/HomeAutomation/res/temp.txt",
             "name": "Temperature-sensor"
         }
     ],
@@ -19,28 +19,28 @@
             "platform": "cmdSwitch2",
             "switches": [
                 {
+                    "name": "Fan",
+                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/switcher.py -d fan -off",
+                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/switcher.py -d fan -on",
+                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/switcher.py -d fan -s"
+                },
+                {
                     "name": "Left lamp",
-                    "off_cmd": "python3 /home/pi/WD/home_automation/home_automation/switcher.py -d llamp -off",
-                    "on_cmd": "python3 /home/pi/WD/home_automation/home_automation/switcher.py -d llamp -on",
-                    "state_cmd": "python3 /home/pi/WD/home_automation/home_automation/switcher.py -d llamp -s"
+                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/switcher.py -d llamp -off",
+                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/switcher.py -d llamp -on",
+                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/switcher.py -d llamp -s"
                 },
                 {
                     "name": "Right lamp",
-                    "off_cmd": "python3 /home/pi/WD/home_automation/home_automation/switcher.py -d rlamp -off",
-                    "on_cmd": "python3 /home/pi/WD/home_automation/home_automation/switcher.py -d rlamp -on",
-                    "state_cmd": "python3 /home/pi/WD/home_automation/home_automation/switcher.py -d rlamp -s"
-                },
-                {
-                    "name": "Fan",
-                    "off_cmd": "python3 /home/pi/WD/home_automation/home_automation/switcher.py -d fan -off",
-                    "on_cmd": "python3 /home/pi/WD/home_automation/home_automation/switcher.py -d fan -on",
-                    "state_cmd": "python3 /home/pi/WD/home_automation/home_automation/switcher.py -d fan -s"
+                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/switcher.py -d rlamp -off",
+                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/switcher.py -d rlamp -on",
+                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/switcher.py -d rlamp -s"
                 },
                 {
                     "name": "Neon",
-                    "off_cmd": "python3 /home/pi/WD/home_automation/home_automation/switcher.py -d neon -off",
-                    "on_cmd": "python3 /home/pi/WD/home_automation/home_automation/switcher.py -d neon -on",
-                    "state_cmd": "python3 /home/pi/WD/home_automation/home_automation/switcher.py -d neon -s"
+                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/switcher.py -d neon -off",
+                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/switcher.py -d neon -on",
+                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/switcher.py -d neon -s"
                 }
             ]
         }
