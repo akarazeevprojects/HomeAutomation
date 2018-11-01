@@ -6,11 +6,7 @@ Then you need to configure your home automation system inside the `system.py` fi
 
 After that just generate new `config.json` and replace `~/.homebridge/config.json` with newly generated `newconfig.json`:
 ```
-<<<<<<< HEAD
-python3 home_automation/generate_config.py -r
-=======
 python home_automation/generate_config.py -r
->>>>>>> 62d8a3ca74d5ae84bdfdabb1dad1e8954bede276
 ```
 
 To start all services you can use `res/startup.sh` (with **screen** commands) or `res/tmux_startup.sh` (with **tmux** commands).
