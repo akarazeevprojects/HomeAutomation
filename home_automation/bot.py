@@ -4,15 +4,14 @@ import logging
 import json
 import re
 
-import utils
-import system
+from home_automation import utils, system
 
 # Enable logging.
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - \
-                            %(message)s', level=logging.INFO)
+                            %(message)s', level=logging.DEBUG)
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 
 def get_token():

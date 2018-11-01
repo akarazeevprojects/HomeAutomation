@@ -2,7 +2,7 @@ from shutil import copyfile
 import argparse
 import json
 
-import system
+from home_automation import system
 
 
 def build_parser():

@@ -5,10 +5,15 @@ import os
 import sys
 import logging
 
-import system
+from home_automation import system
 
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
+
+
+def setup_pins(relays):
+    for key in relays:
+        GPIO.setup(key, GPIO.OUT)
 
 
 def check_exists(relays_path):
@@ -25,30 +30,52 @@ def check_exists(relays_path):
         with open(relays_path, 'rb') as f:
             relays = pickle.load(f)
 
+    setup_pins(relays)
+
     return relays
 
 
-def setup_pins(relays):
-    for key in relays:
-        GPIO.setup(key, GPIO.OUT)
+def turn_on(alias):
+    relays = check_exists(system.RELAYS_PATH)
+    relay = system.gpio_mapping[alias]
+    relays[relay] = 1
+    GPIO.output(relay, relays[relay])
+    dump(system.RELAYS_PATH, relays)
 
 
-def perform_action(args, relays):
+def turn_off(alias):
+    relays = check_exists(system.RELAYS_PATH)
+    relay = system.gpio_mapping[alias]
+    relays[relay] = 0
+    GPIO.output(relay, relays[relay])
+    dump(system.RELAYS_PATH, relays)
+
+
+def get_state_returncode(alias):
+    relays = check_exists(system.RELAYS_PATH)
+    relay = system.gpio_mapping[alias]
+    status = relays[relay]
+    if status == 0:
+        sys.exit(1)
+
+
+def get_state(alias):
+    relays = check_exists(system.RELAYS_PATH)
+    relay = system.gpio_mapping[alias]
+    status = relays[relay]
+    return status
+
+
+def perform_action(args):
+    relays = check_exists(system.RELAYS_PATH)
     logging.info(relays)
 
     if args.on:
-        relay = system.gpio_mapping[args.device]
-        relays[system.gpio_mapping[args.device]] = 1
-        GPIO.output(relay, relays[relay])
+        turn_on(args.device)
     elif args.off:
-        relay = system.gpio_mapping[args.device]
-        relays[system.gpio_mapping[args.device]] = 0
-        GPIO.output(relay, relays[relay])
+        turn_off(args.device)
     elif args.status:
-        relay = system.gpio_mapping[args.device]
-        status = relays[relay]
-        if status == 0:
-            sys.exit(1)
+        get_state_returncode(args.device)
 
 
 def dump(relays_path, relays):
@@ -75,16 +102,7 @@ def main():
     else:
         logging.basicConfig(level=logging.CRITICAL)
 
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    print(dir_path)
-    # relays_path = os.path.join(dir_path, system.RELAYS_FILE)
-
-    # relays = check_exists(relays_path)
-    relays = check_exists(system.RELAYS_PATH)
-    setup_pins(relays)
-    perform_action(args, relays)
-    # dump(relays_path, relays)
-    dump(system.RELAYS_PATH, relays)
+    perform_action(args)
 
 
 if __name__ == '__main__':

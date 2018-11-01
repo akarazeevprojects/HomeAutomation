@@ -2,7 +2,7 @@ import subprocess
 import emoji
 import json
 
-import system
+from home_automation import system, switcher
 
 
 def get_config():
@@ -25,18 +25,15 @@ def get_aliases():
 
 
 def compose_state():
-    config = get_config()
     text = list()
-    for swch in config['platforms'][0]['switches']:
-        full_name = swch['name']
+    for full_name in system.alias_mapping:
         alias = system.alias_mapping[full_name]
         switch_command = '{}{}'.format(system.SWITCH, alias)
 
-        state_command = swch['state_cmd']
-        process = subprocess.Popen(state_command, stdout=subprocess.PIPE, shell=True)
-        out, err = process.communicate()
+        state = switcher.get_state(alias)
+        print(alias, state)
 
-        if process.returncode == 1:
+        if state == 0:
             # Turned off.
             state = ':electric_plug:'
         else:
@@ -57,28 +54,14 @@ def compose_state():
     return text
 
 
-def switch(alias_to_switch):
-    # print('switching {}...'.format(alias_to_switch))
-
-    config = get_config()
-    for swch in config['platforms'][0]['switches']:
-        full_name = swch['name']
-        alias = system.alias_mapping[full_name]
-
-        if alias_to_switch == alias:
-            state_command = swch['state_cmd']
-            process = subprocess.Popen(state_command, stdout=subprocess.PIPE, shell=True)
-            out, err = process.communicate()
-
-            if process.returncode == 1:
-                # Turned off.
-                command_to_run = swch['on_cmd']
-            else:
-                # Turned on.
-                command_to_run = swch['off_cmd']
-
-            process = subprocess.Popen(command_to_run, stdout=subprocess.PIPE, shell=True)
-            out, err = process.communicate()
+def switch(alias):
+    state = switcher.get_state(alias)
+    if state == 0:
+        # Turned off.
+        switcher.turn_on(alias)
+    else:
+        # Turned on.
+        switcher.turn_off(alias)
 
 
 def main():
@@ -94,7 +77,7 @@ def main():
     # state = compose_state()
     # print(state)
 
-    generate_config()
+    pass
 
 
 if __name__ == '__main__':

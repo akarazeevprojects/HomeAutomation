@@ -2,7 +2,7 @@ import subprocess
 import time
 import os
 
-import system
+from home_automation import system
 
 while True:
     p = subprocess.Popen(['vcgencmd', 'measure_temp'], stdout=subprocess.PIPE)

@@ -1,6 +1,6 @@
 TEMPERATURE_PATH = '/home/pi/WD/home_automation/res/temp.txt'
 RELAYS_PATH = '/home/pi/WD/home_automation/res/relays.pkl'
-SWITCHER_PATH = '/home/pi/WD/home_automation/switcher.py'
+SWITCHER_PATH = '/home/pi/WD/home_automation/home_automation/switcher.py'
 TGTOKEN_PATH = '/home/pi/WD/home_automation/res/token.json'
 
 NEWCONFIG_PATH = '/home/pi/WD/home_automation/res/newconfig.json'
