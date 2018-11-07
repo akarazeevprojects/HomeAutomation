@@ -1,4 +1,4 @@
-## HomeAutomation with bot for Telegram and [homebridge](https://github.com/nfarina/homebridge)
+## HomeAutomation with bot for Telegram and [homebridge](https://github.com/nfarina/homebridge) [[video demonstration](https://youtu.be/CBYfVpwmrjc) of homebridge/HomeKit part]
 
 First of all you need to install `homebridge` on your machine (Raspberry Pi) along with plugins (personally I use **cmdSwitch2** and **TemperatureFile** for now).
 
