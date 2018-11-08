@@ -1,4 +1,4 @@
-## HomeAutomation with bot for Telegram and [homebridge](https://github.com/nfarina/homebridge)
+## HomeAutomation with bot for Telegram and homebridge
 
 [[video demonstration](https://youtu.be/CBYfVpwmrjc) of homebridge/HomeKit part]
 
