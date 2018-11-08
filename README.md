@@ -4,8 +4,6 @@
 
 Manual for installation of [Raspbian and homebridge on Raspberry Pi](https://akarazeev.github.io/home-automation-homekit/) and [a project of home automation via HomeKit using Raspberry Pi](https://akarazeev.github.io/proj_homeautomation/).
 
----
-
 ## Overview
 
 First of all you need to install `homebridge` on your machine (Raspberry Pi) along with plugins (personally I use **cmdSwitch2** and **TemperatureFile** for now).
