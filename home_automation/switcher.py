@@ -28,7 +28,12 @@ def check_exists(relays_path):
             pickle.dump(relays, f)
     else:
         with open(relays_path, 'rb') as f:
-            relays = pickle.load(f)
+            relays = None
+            while relays is None:
+                try:
+                    relays = pickle.load(f)
+                except:
+                    pass
 
     setup_pins(relays)
 
