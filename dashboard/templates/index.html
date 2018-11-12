@@ -1,0 +1,58 @@
+{% extends "bootstrap/base.html" %}
+
+
+{% block title %}
+Flask-MQTT example
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+
+    socket.on('mqtt_message', function(data) {
+      console.log(data);
+      var text = data['payload'];
+      $("h1").text(text);
+
+      var weather = data['weather'];
+      $("#weather").text(weather);
+
+      var trains = data['trains'];
+      $("#trains").text(trains);
+
+      var exchange = data['exchange'];
+      $("#exchange").text(exchange);
+
+      var time = data['time'];
+      $("#time").text(time);
+    })
+  });
+</script>
+{% endblock %}
+
+{% block content %}
+
+<style>
+    h3 {
+        font-size: 500%;
+    }
+</style>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+        <h3 id="time" align="center" style="background-color:#ffffff">_time_<h3>
+        <h3 id="weather" align="center" style="background-color:#41f4f1">_weather_<h3>
+        <h3 id="trains" align="center" style="background-color:#74f441">_trains_<h3>
+        <h3 id="exchange" align="center" style="background-color:#f4df42">_stocks_<h3>
+    </div>
+  </div>
+</div>
+{% endblock %}
