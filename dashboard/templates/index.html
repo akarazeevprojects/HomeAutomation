@@ -1,58 +1,74 @@
-{% extends "bootstrap/base.html" %}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Flask-SocketIO Test</title>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            namespace = '/test';
+            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
 
+            socket.on('my_response', function(data) {
+                var weather = data['weather'];
+                $("#weather").text(weather);
 
-{% block title %}
-Flask-MQTT example
-{% endblock %}
+                var trains = data['trains'];
+                $("#trains").text(trains);
 
-{% block styles %}
-{{ super() }}
-{% endblock %}
+                var exchange = data['exchange'];
+                $("#exchange").text(exchange);
 
-{% block scripts %}
-{{ super() }}
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function() {
-    var socket = io.connect('http://' + document.domain + ':' + location.port);
+                var time = data['time'];
+                $("#time").text(time);
+            });
+        });
+    </script>
+</head>
+<body>
+    <style>
+        h3 {
+            font-size: 500%;
+        }
 
-    socket.on('mqtt_message', function(data) {
-      console.log(data);
-      var text = data['payload'];
-      $("h1").text(text);
+        #time {
+            border-style:solid;
+            border-color:#287EC7;
+            background-color:#ffffff;
+            text-align:center;
+        }
 
-      var weather = data['weather'];
-      $("#weather").text(weather);
+        #weather {
+            border-style:solid;
+            border-color:#287EC7;
+            background-color:#41f4f1;
+            text-align:center;
+        }
 
-      var trains = data['trains'];
-      $("#trains").text(trains);
+        #trains {
+            border-style:solid;
+            border-color:#287EC7;
+            background-color:#74f441;
+            text-align:center;
+        }
 
-      var exchange = data['exchange'];
-      $("#exchange").text(exchange);
+        #exchange {
+            border-style:solid;
+            border-color:#287EC7;
+            background-color:#f4df42;
+            text-align:center;
+        }
+    </style>
 
-      var time = data['time'];
-      $("#time").text(time);
-    })
-  });
-</script>
-{% endblock %}
-
-{% block content %}
-
-<style>
-    h3 {
-        font-size: 500%;
-    }
-</style>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-12">
-        <h3 id="time" align="center" style="background-color:#ffffff">_time_<h3>
-        <h3 id="weather" align="center" style="background-color:#41f4f1">_weather_<h3>
-        <h3 id="trains" align="center" style="background-color:#74f441">_trains_<h3>
-        <h3 id="exchange" align="center" style="background-color:#f4df42">_stocks_<h3>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <h3 id="time">_time_</h3>
+                <h3 id="weather">_weather_</h3>
+                <h3 id="trains">_trains_</h3>
+                <h3 id="exchange">_exchange_</h3>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-{% endblock %}
+</body>
+</html>

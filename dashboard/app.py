@@ -1,63 +1,63 @@
-"""
-
-A small Test application to show how to use Flask-MQTT.
-
-"""
-
-import eventlet
 from flask import Flask, render_template
-from flask_mqtt import Mqtt
-from flask_socketio import SocketIO
-from flask_bootstrap import Bootstrap
-import json
+from flask_socketio import SocketIO, emit
+from threading import Lock
+import datetime
 
-eventlet.monkey_patch()
+from utils import get_trains, get_weather, get_exchange
 
-TOPIC = 'dashboard'
-QOS = 2
+SHORT_FLOAT_STR = "{:.2f}"
+ELLIPSIS = "..."
 
 app = Flask(__name__)
-app.config['SECRET'] = 'my secret key'
-app.config['TEMPLATES_AUTO_RELOAD'] = True
-app.config['MQTT_BROKER_URL'] = '192.168.0.111'
-app.config['MQTT_BROKER_PORT'] = 1883
-app.config['MQTT_CLIENT_ID'] = 'flask_mqtt'
-app.config['MQTT_USERNAME'] = ''
-app.config['MQTT_PASSWORD'] = ''
-app.config['MQTT_KEEPALIVE'] = 5
-app.config['MQTT_TLS_ENABLED'] = False
-app.config['MQTT_LAST_WILL_TOPIC'] = TOPIC
-app.config['MQTT_LAST_WILL_MESSAGE'] = 'bye'
-app.config['MQTT_LAST_WILL_QOS'] = 2
+socketio = SocketIO(app, async_mode=None)
+thread = None
+thread_lock = Lock()
 
 
-mqtt = Mqtt(app)
-socketio = SocketIO(app)
-bootstrap = Bootstrap(app)
+def background_thread():
+    """Example of how to send server generated events to clients."""
+    while True:
+        socketio.sleep(0.1)
+
+        now = datetime.datetime.now()
+        nowstr = now.strftime("%H:%M:%S")
+
+        weather = get_weather(now)
+
+        trains = get_trains(now)
+        if trains:
+            blank = SHORT_FLOAT_STR
+        else:
+            blank = ELLIPSIS
+        trainsstr = "До Окружной: через {} минут".format(blank)
+        trainsstr = trainsstr.format(trains[0])
+
+        exchange = get_exchange()
+        exchangestr = "$: {}, €: {}".format(SHORT_FLOAT_STR, SHORT_FLOAT_STR)
+        exchangestr = exchangestr.format(exchange['usd'], exchange['eur'])
+
+        data = dict(
+            time=nowstr,
+            weather="Погода: {}/{}, {}".format(weather['high'], weather['low'], weather['text']),
+            trains=trainsstr,
+            exchange=exchangestr
+        )
+
+        socketio.emit('my_response', data=data, namespace='/test')
 
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', async_mode=socketio.async_mode)
 
 
-@mqtt.on_message()
-def handle_mqtt_message(client, userdata, message):
-    payload = message.payload.decode()
-    payload = json.loads(payload)
-
-    data = dict(
-        topic=TOPIC,
-        payload=payload,
-        time=payload['time'],
-        weather=payload['weather'],
-        trains=payload['trains'],
-        exchange=payload['exchange'],
-        qos=QOS
-    )
-    socketio.emit('mqtt_message', data=data)
+@socketio.on('connect', namespace='/test')
+def test_connect():
+    global thread
+    with thread_lock:
+        if thread is None:
+            thread = socketio.start_background_task(target=background_thread)
 
 
 if __name__ == '__main__':
-    mqtt.subscribe(TOPIC, QOS)
-    socketio.run(app, host='0.0.0.0', port=5000, use_reloader=True, debug=True)
+    socketio.run(app, host="0.0.0.0", port=5000)
