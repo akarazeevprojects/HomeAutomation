@@ -2,14 +2,18 @@ from flask import Flask, render_template
 from flask_socketio import SocketIO, emit
 from threading import Lock
 import datetime
+import logging
 
 from utils import get_trains, get_weather, get_exchange
+
+logging.getLogger('engineio').setLevel(logging.WARNING)
+logging.getLogger('socketio').setLevel(logging.WARNING)
 
 SHORT_FLOAT_STR = "{:.2f}"
 ELLIPSIS = "..."
 
 app = Flask(__name__)
-socketio = SocketIO(app, async_mode=None)
+socketio = SocketIO(app, logger=False, engineio_logger=False, async_mode=None)
 thread = None
 thread_lock = Lock()
 
