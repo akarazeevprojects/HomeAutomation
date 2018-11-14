@@ -11,17 +11,12 @@
             var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
 
             socket.on('my_response', function(data) {
-                var weather = data['weather'];
-                $("#weather").text(weather);
-
-                var trains = data['trains'];
-                $("#trains").text(trains);
-
-                var exchange = data['exchange'];
-                $("#exchange").text(exchange);
-
-                var time = data['time'];
-                $("#time").text(time);
+                $("#time").text(data['time']);
+                $("#weather").text(data['weather']);
+                $("#traintime").text(data['traintime']);
+                $("#traintimenext").text(data['traintimenext']);
+                $("#eur").text(data['eur']);
+                $("#usd").text(data['usd']);
             });
         });
     </script>
@@ -46,17 +41,35 @@
             text-align:center;
         }
 
-        #trains {
+        #traintime {
             border-style:solid;
             border-color:#287EC7;
             background-color:#74f441;
             text-align:center;
         }
 
-        #exchange {
+        #traintimenext {
+            border-style:solid;
+            border-color:#287EC7;
+            background-color:#74f441;
+            text-align:center;
+        }
+
+        #usd {
             border-style:solid;
             border-color:#287EC7;
             background-color:#f4df42;
+            text-align:center;
+        }
+
+        #eur {
+            border-style:solid;
+            border-color:#287EC7;
+            background-color:#f4df42;
+            text-align:center;
+        }
+
+        #row {
             text-align:center;
         }
     </style>
@@ -66,8 +79,8 @@
             <div class="col-xs-12">
                 <h3 id="time">_time_</h3>
                 <h3 id="weather">_weather_</h3>
-                <h3 id="trains">_trains_</h3>
-                <h3 id="exchange">_exchange_</h3>
+                <h3 id="row">До Окружной: через <a id="traintime"></a> минут (следующая: <a id="traintimenext"></a>)</h3>
+                <h3 id="row">$: <a id="usd"></a>, €: <a id="eur"></a></h3>
         </div>
       </div>
     </div>

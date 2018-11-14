@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from flask_socketio import SocketIO, emit
+from flask_socketio import SocketIO
 from threading import Lock
 import datetime
 import logging
@@ -28,23 +28,28 @@ def background_thread():
 
         weather = get_weather(now)
 
-        trains = get_trains(now)
+        trains = get_trains(now, 10)
         if trains:
-            blank = SHORT_FLOAT_STR
+            traintime = SHORT_FLOAT_STR.format(trains[0])
         else:
-            blank = ELLIPSIS
-        trainsstr = "До Окружной: через {} минут".format(blank)
-        trainsstr = trainsstr.format(trains[0])
+            traintime = ELLIPSIS
+
+        if len(trains) >= 2:
+            traintimenext = SHORT_FLOAT_STR.format(trains[1])
+        else:
+            traintimenext = ELLIPSIS
 
         exchange = get_exchange()
-        exchangestr = "$: {}, €: {}".format(SHORT_FLOAT_STR, SHORT_FLOAT_STR)
-        exchangestr = exchangestr.format(exchange['usd'], exchange['eur'])
+        exchange['usd'] = SHORT_FLOAT_STR.format(exchange['usd'])
+        exchange['eur'] = SHORT_FLOAT_STR.format(exchange['eur'])
 
         data = dict(
             time=nowstr,
             weather="Погода: {}/{}, {}".format(weather['high'], weather['low'], weather['text']),
-            trains=trainsstr,
-            exchange=exchangestr
+            traintime=traintime,
+            traintimenext=traintimenext,
+            usd=exchange['usd'],
+            eur=exchange['eur']
         )
 
         socketio.emit('my_response', data=data, namespace='/test')
