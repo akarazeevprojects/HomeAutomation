@@ -45,7 +45,7 @@ def background_thread():
 
         data = dict(
             time=nowstr,
-            weather="Погода: {}/{}, {}".format(weather['high'], weather['low'], weather['text']),
+            weather="{}, {}/{}".format(weather['text'], weather['high'], weather['low']),
             traintime=traintime,
             traintimenext=traintimenext,
             usd=exchange['usd'],
@@ -69,4 +69,4 @@ def test_connect():
 
 
 if __name__ == '__main__':
-    socketio.run(app, host="0.0.0.0", port=5000)
+    socketio.run(app, host="0.0.0.0", port=5000, debug=True)

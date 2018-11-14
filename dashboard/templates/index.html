@@ -23,66 +23,69 @@
 </head>
 <body>
     <style>
-        h3 {
-            font-size: 10vh;
-        }
-
         #time {
-            border-style:solid;
+            /* border-style:solid;
             border-color:#287EC7;
-            background-color:#ffffff;
+            background-color:#ffffff; */
             text-align:center;
         }
 
         #weather {
-            border-style:solid;
+            /* border-style:solid;
             border-color:#287EC7;
-            background-color:#41f4f1;
+            background-color:#41f4f1; */
             text-align:center;
         }
 
         #traintime {
-            border-style:solid;
-            border-color:#287EC7;
+            /* border-style:solid;
+            border-color:#287EC7; */
             background-color:#74f441;
             text-align:center;
         }
 
         #traintimenext {
-            border-style:solid;
-            border-color:#287EC7;
+            /* border-style:solid;
+            border-color:#287EC7; */
             background-color:#74f441;
             text-align:center;
         }
 
         #usd {
-            border-style:solid;
-            border-color:#287EC7;
+            /* border-style:solid;
+            border-color:#287EC7; */
             background-color:#f4df42;
             text-align:center;
         }
 
         #eur {
-            border-style:solid;
-            border-color:#287EC7;
+            /* border-style:solid;
+            border-color:#287EC7; */
             background-color:#f4df42;
             text-align:center;
         }
 
-        #row {
-            text-align:center;
+        td.big {
+            line-height: 200%;
         }
     </style>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-12">
-                <h3 id="time">_time_</h3>
-                <h3 id="weather">_weather_</h3>
-                <h3 id="row">До Окружной: через <a id="traintime"></a> минут (следующая: <a id="traintimenext"></a>)</h3>
-                <h3 id="row">$: <a id="usd"></a>, €: <a id="eur"></a></h3>
-        </div>
-      </div>
-    </div>
+    <table border="1" style="height: 100%; width: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+        <tr style="height: 50%;" align="center">
+            <td id="time" style="font-size: 13vw; height: 50%; width: 50%;">_time_</td>
+            <td style="font-size: 4vw; width: 50%;" class="big">
+                Погода: <a id="weather"></a>&deg;C
+                <br>
+                $: <a id="usd"></a>, €: <a id="eur"></a>
+            </td>
+        </tr>
+        <tr style="height: 50%;" align="center">
+            <td colspan="2" style="font-size: 7vw;" class="big">
+                До Окружной: через <a id="traintime"></a> минут
+                <br>
+                (следующая: через <a id="traintimenext"></a> минут)
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
