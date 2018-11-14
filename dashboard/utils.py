@@ -35,9 +35,9 @@ def get_trains(date, thresholdmins=15):
     for deptime in departures:
         difference = deptime - date
         if difference.days >= 0:
-            difmins = difference.seconds / 60.
-            if difmins > thresholdmins:
-                trains.append(difmins)
+            difsec = difference.seconds
+            if difsec > thresholdmins * 60.:
+                trains.append(difsec)
 
     trains = sorted(trains)
 

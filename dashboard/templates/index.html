@@ -19,9 +19,11 @@
                 if (traintimevalue < 15) {
                     $("#traintime").css({'background-color': 'red'});
                     $("#traintime").css({'color': 'white'});
+                    $("#traintime").addClass("blink_text");
                 } else {
                     $("#traintime").css({'background-color': '#74f441'});
                     $("#traintime").css({'color': 'black'});
+                    $("#traintime").removeClass("blink_text");
                 }
 
                 $("#traintime").text(data['traintime']);
@@ -34,6 +36,30 @@
 </head>
 <body>
     <style>
+        .blink_text {
+            animation:1s blinker linear infinite;
+            -webkit-animation:1s blinker linear infinite;
+            -moz-animation:1s blinker linear infinite;
+        }
+
+        @-moz-keyframes blinker {
+            0% { opacity: 1.0; }
+            50% { opacity: 0.0; }
+            100% { opacity: 1.0; }
+        }
+
+        @-webkit-keyframes blinker {
+            0% { opacity: 1.0; }
+            50% { opacity: 0.0; }
+            100% { opacity: 1.0; }
+        }
+
+        @keyframes blinker {
+            0% { opacity: 1.0; }
+            50% { opacity: 0.0; }
+            100% { opacity: 1.0; }
+        }
+
         #time {
             /* border-style:solid;
             border-color:#287EC7;
@@ -92,9 +118,9 @@
         </tr>
         <tr style="height: 50%;" align="center">
             <td colspan="2" style="font-size: 7vw;" class="big">
-                До Окружной: <a id="traintime"></a> минут
+                До Окружной: <b><a id="traintime"></a></b>
                 <br>
-                (следующая: <a id="traintimenext"></a> минут)
+                (следующая элка: <b><a id="traintimenext"></a></b>)
             </td>
         </tr>
     </table>

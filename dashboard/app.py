@@ -10,6 +10,8 @@ logging.getLogger('engineio').setLevel(logging.WARNING)
 logging.getLogger('socketio').setLevel(logging.WARNING)
 
 SHORT_FLOAT_STR = "{:.2f}"
+WEATHER_STR = "{}, {}/{}"
+TIME_STR = "{:02d}:{:02d}"
 ELLIPSIS = "..."
 
 app = Flask(__name__)
@@ -30,12 +32,12 @@ def background_thread():
 
         trains = get_trains(now, 10)
         if trains:
-            traintime = SHORT_FLOAT_STR.format(trains[0])
+            traintime = TIME_STR.format(int(trains[0] / 60.), trains[0] % 60)
         else:
             traintime = ELLIPSIS
 
         if len(trains) >= 2:
-            traintimenext = SHORT_FLOAT_STR.format(trains[1])
+            traintimenext = TIME_STR.format(int(trains[1] / 60.), trains[1] % 60)
         else:
             traintimenext = ELLIPSIS
 
@@ -45,7 +47,7 @@ def background_thread():
 
         data = dict(
             time=nowstr,
-            weather="{}, {}/{}".format(weather['text'], weather['high'], weather['low']),
+            weather=WEATHER_STR.format(weather['text'], weather['high'], weather['low']),
             traintime=traintime,
             traintimenext=traintimenext,
             usd=exchange['usd'],
