@@ -13,6 +13,17 @@
             socket.on('my_response', function(data) {
                 $("#time").text(data['time']);
                 $("#weather").text(data['weather']);
+
+                var traintimevalue = parseFloat(data['traintime'])
+
+                if (traintimevalue < 15) {
+                    $("#traintime").css({'background-color': 'red'});
+                    $("#traintime").css({'color': 'white'});
+                } else {
+                    $("#traintime").css({'background-color': '#74f441'});
+                    $("#traintime").css({'color': 'black'});
+                }
+
                 $("#traintime").text(data['traintime']);
                 $("#traintimenext").text(data['traintimenext']);
                 $("#eur").text(data['eur']);
@@ -74,7 +85,7 @@
         <tr style="height: 50%;" align="center">
             <td id="time" style="font-size: 13vw; height: 50%; width: 50%;">_time_</td>
             <td style="font-size: 4vw; width: 50%;" class="big">
-                Погода: <a id="weather"></a>&deg;C
+                Погода: <a id="weather"></a> &deg;C
                 <br>
                 $: <a id="usd"></a>, €: <a id="eur"></a>
             </td>
