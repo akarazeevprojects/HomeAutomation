@@ -1,58 +1,102 @@
-{% extends "bootstrap/base.html" %}
+<!DOCTYPE HTML>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <title>Flask-SocketIO Test</title>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            namespace = '/test';
+            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
 
+            socket.on('my_response', function(data) {
+                $("#time").text(data['time']);
+                $("#weather").text(data['weather']);
 
-{% block title %}
-Flask-MQTT example
-{% endblock %}
+                var traintimevalue = parseFloat(data['traintime'])
 
-{% block styles %}
-{{ super() }}
-{% endblock %}
+                if (traintimevalue < 15) {
+                    $("#traintime").css({'background-color': 'red'});
+                    $("#traintime").css({'color': 'white'});
+                } else {
+                    $("#traintime").css({'background-color': '#74f441'});
+                    $("#traintime").css({'color': 'black'});
+                }
 
-{% block scripts %}
-{{ super() }}
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function() {
-    var socket = io.connect('http://' + document.domain + ':' + location.port);
+                $("#traintime").text(data['traintime']);
+                $("#traintimenext").text(data['traintimenext']);
+                $("#eur").text(data['eur']);
+                $("#usd").text(data['usd']);
+            });
+        });
+    </script>
+</head>
+<body>
+    <style>
+        #time {
+            /* border-style:solid;
+            border-color:#287EC7;
+            background-color:#ffffff; */
+            text-align:center;
+        }
 
-    socket.on('mqtt_message', function(data) {
-      console.log(data);
-      var text = data['payload'];
-      $("h1").text(text);
+        #weather {
+            /* border-style:solid;
+            border-color:#287EC7;
+            background-color:#41f4f1; */
+            text-align:center;
+        }
 
-      var weather = data['weather'];
-      $("#weather").text(weather);
+        #traintime {
+            /* border-style:solid;
+            border-color:#287EC7; */
+            background-color:#74f441;
+            text-align:center;
+        }
 
-      var trains = data['trains'];
-      $("#trains").text(trains);
+        #traintimenext {
+            /* border-style:solid;
+            border-color:#287EC7; */
+            background-color:#74f441;
+            text-align:center;
+        }
 
-      var exchange = data['exchange'];
-      $("#exchange").text(exchange);
+        #usd {
+            /* border-style:solid;
+            border-color:#287EC7; */
+            background-color:#f4df42;
+            text-align:center;
+        }
 
-      var time = data['time'];
-      $("#time").text(time);
-    })
-  });
-</script>
-{% endblock %}
+        #eur {
+            /* border-style:solid;
+            border-color:#287EC7; */
+            background-color:#f4df42;
+            text-align:center;
+        }
 
-{% block content %}
+        td.big {
+            line-height: 200%;
+        }
+    </style>
 
-<style>
-    h3 {
-        font-size: 500%;
-    }
-</style>
-
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-xs-12">
-        <h3 id="time" align="center" style="background-color:#ffffff">_time_<h3>
-        <h3 id="weather" align="center" style="background-color:#41f4f1">_weather_<h3>
-        <h3 id="trains" align="center" style="background-color:#74f441">_trains_<h3>
-        <h3 id="exchange" align="center" style="background-color:#f4df42">_stocks_<h3>
-    </div>
-  </div>
-</div>
-{% endblock %}
+    <table border="1" style="height: 100%; width: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
+        <tr style="height: 50%;" align="center">
+            <td id="time" style="font-size: 13vw; height: 50%; width: 50%;">_time_</td>
+            <td style="font-size: 4vw; width: 50%;" class="big">
+                Погода: <a id="weather"></a> &deg;C
+                <br>
+                $: <a id="usd"></a>, €: <a id="eur"></a>
+            </td>
+        </tr>
+        <tr style="height: 50%;" align="center">
+            <td colspan="2" style="font-size: 7vw;" class="big">
+                До Окружной: <a id="traintime"></a> минут
+                <br>
+                (следующая: <a id="traintimenext"></a> минут)
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
