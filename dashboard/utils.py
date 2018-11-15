@@ -81,9 +81,13 @@ def get_weather(date):
 def get_exchange():
     c = CurrencyRates()
 
+   # res = dict(
+   #     eur=c.get_rate('EUR', 'RUB'),
+   #     usd=c.get_rate('USD', 'RUB')
+   # )
     res = dict(
-        eur=c.get_rate('EUR', 'RUB'),
-        usd=c.get_rate('USD', 'RUB')
+	    eur=-0.1,
+        usd=-0.1
     )
-
+    
     return res
