@@ -4,7 +4,7 @@ from threading import Lock
 import datetime
 import logging
 
-from utils import get_trains, get_weather, get_exchange
+from utils import get_trains, get_weather, get_exchange, check_date
 
 logging.getLogger('engineio').setLevel(logging.WARNING)
 logging.getLogger('socketio').setLevel(logging.WARNING)
@@ -54,6 +54,7 @@ def background_thread():
             eur=exchange['eur']
         )
 
+        check_date(now)
         socketio.emit('my_response', data=data, namespace='/test')
 
 
@@ -71,4 +72,4 @@ def test_connect():
 
 
 if __name__ == '__main__':
-    socketio.run(app, host="0.0.0.0", port=5000, debug=True)
+    socketio.run(app, host="0.0.0.0", port=5000)

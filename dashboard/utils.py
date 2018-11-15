@@ -9,16 +9,30 @@ saved_date = datetime.datetime.now()
 weather_forecast = None
 
 
+def compare_dates(date1, date2):
+    res = (date1.hour == date2.hour)
+    return res
+
+
+def check_date(date):
+    global saved_date
+    equal_dates = compare_dates(date, saved_date)
+    if not equal_dates:
+        saved_date = date
+
+
 def get_trains(date, thresholdmins=15):
     global departures
-    global saved_date
-
-    if departures is None or date.hour != saved_date.hour:
-        if date.hour != saved_date.hour:
-            saved_date = date
-
+   
+    equal_dates = compare_dates(date, saved_date)
+ 
+    if departures is None or not equal_dates:
         datestr = date.strftime("%Y-%m-%d")
+        print("==DATE==")
+        print(date)
         URL = "https://api.rasp.yandex.net/v3.0/search/?apikey=57f7ab5c-05ca-4f02-a9af-61c71b46dbb6&format=json&from=s9600766&to=s9601830&lang=ru_RU&page=1&date={}".format(datestr)
+        print(URL)
+        
         r = requests.get(url=URL)
         data = r.json()
         segments = data['segments']
@@ -46,12 +60,10 @@ def get_trains(date, thresholdmins=15):
 
 def get_weather(date):
     global weather_forecast
-    global saved_date
 
-    if weather_forecast is None or date.hour != saved_date.hour:
-        if date.hour != saved_date.hour:
-            saved_date = date
+    equal_dates = compare_dates(date, saved_date)
 
+    if weather_forecast is None or not equal_dates:
         weather = Weather(unit=Unit.CELSIUS)
         location = weather.lookup_by_location('Dolgoprudny')
 
@@ -75,7 +87,3 @@ def get_exchange():
     )
 
     return res
-
-
-if __name__ == '__main__':
-    print(get_exchange())
