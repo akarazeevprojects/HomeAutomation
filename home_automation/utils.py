@@ -1,8 +1,23 @@
 import subprocess
 import emoji
 import json
+import os
 
 from home_automation import system, switcher
+
+
+def get_publicurl():
+    os.system("curl  http://localhost:4040/api/tunnels > /home/pi/tunnels.json")
+
+    with open('/home/pi/tunnels.json') as data_file:
+        datajson = json.load(data_file)
+
+    msg = "ngrok URL: "
+
+    for i in datajson['tunnels']:
+        msg = msg + i['public_url'] +'\n'
+
+    return msg
 
 
 def get_config():

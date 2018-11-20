@@ -48,6 +48,11 @@ def command_handler(bot, update):
     utils.switch(alias)
 
 
+def url_command(bot, update):
+    publicurl = utils.get_publicurl()
+    update.message.reply_text(publicurl)
+
+
 def run():
     token = get_token()
 
@@ -59,6 +64,7 @@ def run():
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler('start', start))
+    dp.add_handler(CommandHandler('url', url_command))
     dp.add_handler(MessageHandler(Filters.text, text_handler))
     dp.add_handler(MessageHandler(Filters.command, command_handler))
 
