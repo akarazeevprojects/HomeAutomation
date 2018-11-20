@@ -2,6 +2,8 @@
 
 [[video demonstration](https://youtu.be/CBYfVpwmrjc) of homebridge/HomeKit part]
 
+[![alt](https://img.youtube.com/vi/CBYfVpwmrjc/0.jpg)](https://youtu.be/CBYfVpwmrjc)
+
 Manual for installation of [Raspbian and homebridge on Raspberry Pi](https://akarazeev.github.io/home-automation-homekit/) and [a project of home automation via HomeKit using Raspberry Pi](https://akarazeev.github.io/proj_homeautomation/).
 
 ## Overview
