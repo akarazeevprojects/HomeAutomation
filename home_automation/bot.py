@@ -3,6 +3,7 @@ import telegram
 import logging
 import json
 import re
+import requests
 
 from home_automation import utils, system
 
@@ -53,6 +54,17 @@ def url_command(bot, update):
     update.message.reply_text(publicurl)
 
 
+def make_photo(bot, update):
+    filename = "/home/pi/photo.jpeg"
+    r = requests.get('http://192.168.0.8:5000/get_image')
+    
+    if r.status_code == 200:
+        with open(filename, 'wb') as f:
+            f.write(r.content)
+
+    with open(filename, "rb") as f:
+        update.message.reply_photo(photo=f)
+
 def run():
     token = get_token()
 
@@ -65,6 +77,7 @@ def run():
 
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(CommandHandler('url', url_command))
+    dp.add_handler(CommandHandler('photo', make_photo))
     dp.add_handler(MessageHandler(Filters.text, text_handler))
     dp.add_handler(MessageHandler(Filters.command, command_handler))
 
