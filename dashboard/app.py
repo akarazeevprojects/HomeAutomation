@@ -28,8 +28,8 @@ def background_thread():
         now = datetime.datetime.now()
         nowstr = now.strftime("%H:%M:%S")
 
-        weather = get_weather(now)
-
+        # weather = get_weather(now)
+        weather = {'text': '-1', "high": "-1", "low": '-1'}
         trains = get_trains(now, 10)
         if trains:
             traintime = TIME_STR.format(int(trains[0] / 60.), trains[0] % 60)
