@@ -19,8 +19,8 @@ alias_mapping = {
 }
 
 gpio_mapping = {
-    'fan': 12,
-    'rlamp': 16,
-    'llamp': 20,
-    'neon': 21
+    'neon': 15,
+    'rlamp': 18,
+    'llamp': 23,
+    'fan': 24
 }
