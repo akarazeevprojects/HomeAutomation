@@ -4,15 +4,12 @@ from threading import Lock
 import datetime
 import logging
 
+from utils import ELLIPSIS, SHORT_FLOAT_STR, WEATHER_STR
 from utils import get_trains, get_weather, get_exchange, check_date
 
 logging.getLogger('engineio').setLevel(logging.WARNING)
 logging.getLogger('socketio').setLevel(logging.WARNING)
 
-SHORT_FLOAT_STR = "{:.2f}"
-WEATHER_STR = "{}, {}/{}"
-TIME_STR = "{:02d}:{:02d}"
-ELLIPSIS = "..."
 
 app = Flask(__name__)
 socketio = SocketIO(app, logger=False, engineio_logger=False, async_mode=None)
@@ -28,28 +25,15 @@ def background_thread():
         now = datetime.datetime.now()
         nowstr = now.strftime("%H:%M:%S")
 
-        # weather = get_weather(now)
-        weather = {'text': '-1', "high": "-1", "low": '-1'}
+        weather = get_weather(now)
         trains = get_trains(now, 10)
-        if trains:
-            traintime = TIME_STR.format(int(trains[0] / 60.), trains[0] % 60)
-        else:
-            traintime = ELLIPSIS
-
-        if len(trains) >= 2:
-            traintimenext = TIME_STR.format(int(trains[1] / 60.), trains[1] % 60)
-        else:
-            traintimenext = ELLIPSIS
-
         exchange = get_exchange()
-        exchange['usd'] = SHORT_FLOAT_STR.format(exchange['usd'])
-        exchange['eur'] = SHORT_FLOAT_STR.format(exchange['eur'])
 
         data = dict(
             time=nowstr,
-            weather=WEATHER_STR.format(weather['text'], weather['high'], weather['low']),
-            traintime=traintime,
-            traintimenext=traintimenext,
+            weather=weather,
+            traintime=trains[0],
+            traintimenext=trains[1],
             usd=exchange['usd'],
             eur=exchange['eur']
         )
