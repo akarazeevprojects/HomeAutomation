@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 from flask_socketio import SocketIO
 from threading import Lock
 import datetime
@@ -30,7 +30,8 @@ def background_thread():
 
         weather = get_weather(now)
 
-        trains = get_trains(now, 10)
+        # trains = get_trains(now, 10)
+        trains = [100, 200]
         if trains:
             traintime = TIME_STR.format(int(trains[0] / 60.), trains[0] % 60)
         else:

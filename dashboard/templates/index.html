@@ -2,127 +2,42 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
-    <title>Flask-SocketIO Test</title>
+    <title>Xata</title>
+
     <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
-    <script type="text/javascript" charset="utf-8">
-        $(document).ready(function() {
-            namespace = '/test';
-            var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port + namespace);
 
-            socket.on('my_response', function(data) {
-                $("#time").text(data['time']);
-                $("#weather").text(data['weather']);
-
-                var traintimevalue = parseFloat(data['traintime'])
-
-                if (traintimevalue < 15) {
-                    $("#traintime").css({'background-color': 'red'});
-                    $("#traintime").css({'color': 'white'});
-                    $("#traintime").addClass("blink_text");
-                } else {
-                    $("#traintime").css({'background-color': '#74f441'});
-                    $("#traintime").css({'color': 'black'});
-                    $("#traintime").removeClass("blink_text");
-                }
-
-                $("#traintime").text(data['traintime']);
-                $("#traintimenext").text(data['traintimenext']);
-                $("#eur").text(data['eur']);
-                $("#usd").text(data['usd']);
-            });
-        });
-    </script>
+{#    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.js') }}" charset="utf-8"></script>#}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery2.js') }}" charset="utf-8"></script>
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">#}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main2.css') }}">
 </head>
 <body>
-    <style>
-        .blink_text {
-            animation:1s blinker linear infinite;
-            -webkit-animation:1s blinker linear infinite;
-            -moz-animation:1s blinker linear infinite;
-        }
 
-        @-moz-keyframes blinker {
-            0% { opacity: 1.0; }
-            50% { opacity: 0.0; }
-            100% { opacity: 1.0; }
-        }
+    <div class="container">
+      <h1>Resize Me</h1>
+      <p class="font-size-label">Font Size</p>
+      <button id="up">+</button>
+      <p id="font-size"></p>
+      <button id="down">-</button>
+    </div>
 
-        @-webkit-keyframes blinker {
-            0% { opacity: 1.0; }
-            50% { opacity: 0.0; }
-            100% { opacity: 1.0; }
-        }
-
-        @keyframes blinker {
-            0% { opacity: 1.0; }
-            50% { opacity: 0.0; }
-            100% { opacity: 1.0; }
-        }
-
-        #time {
-            /* border-style:solid;
-            border-color:#287EC7;
-            background-color:#ffffff; */
-            text-align:center;
-        }
-
-        #weather {
-            /* border-style:solid;
-            border-color:#287EC7;
-            background-color:#41f4f1; */
-            text-align:center;
-        }
-
-        #traintime {
-            /* border-style:solid;
-            border-color:#287EC7; */
-            background-color:#74f441;
-            text-align:center;
-        }
-
-        #traintimenext {
-            /* border-style:solid;
-            border-color:#287EC7; */
-            background-color:#74f441;
-            text-align:center;
-        }
-
-        #usd {
-            /* border-style:solid;
-            border-color:#287EC7; */
-            background-color:#f4df42;
-            text-align:center;
-        }
-
-        #eur {
-            /* border-style:solid;
-            border-color:#287EC7; */
-            background-color:#f4df42;
-            text-align:center;
-        }
-
-        td.big {
-            line-height: 200%;
-        }
-    </style>
-
-    <table border="1" style="height: 100%; width: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0;">
-        <tr style="height: 50%;" align="center">
-            <td id="time" style="font-size: 13vw; height: 50%; width: 50%;">_time_</td>
-            <td style="font-size: 4vw; width: 50%;" class="big">
-                Погода: <a id="weather"></a> &deg;C
-                <br>
-                $: <a id="usd"></a>, €: <a id="eur"></a>
-            </td>
-        </tr>
-        <tr style="height: 50%;" align="center">
-            <td colspan="2" style="font-size: 7vw;" class="big">
-                До Окружной: <b><a id="traintime"></a></b>
-                <br>
-                (следующая элка: <b><a id="traintimenext"></a></b>)
-            </td>
-        </tr>
-    </table>
+{#    <table border="1" style="height: 100%; width: 100%; position: absolute; top: 0; bottom: 0; left: 0; right: 0;">#}
+{#        <tr style="height: 50%;" align="center">#}
+{#            <td id="time" style="font-size: 13vw; height: 50%; width: 50%;">_time_</td>#}
+{#            <td style="font-size: 4vw; width: 50%;" class="big">#}
+{#                Погода: <a id="weather"></a> &deg;C#}
+{#                <br>#}
+{#                $: <a id="usd"></a>, €: <a id="eur"></a>#}
+{#            </td>#}
+{#        </tr>#}
+{#        <tr style="height: 50%;" align="center">#}
+{#            <td colspan="2" style="font-size: 7vw;" class="big">#}
+{#                До Окружной: <b><a id="traintime"></a></b>#}
+{#                <br>#}
+{#                (следующая элка: <b><a id="traintimenext"></a></b>)#}
+{#            </td>#}
+{#        </tr>#}
+{#    </table>#}
 </body>
 </html>

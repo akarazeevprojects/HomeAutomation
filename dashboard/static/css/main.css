@@ -1,0 +1,69 @@
+.blink_text {
+    animation:1s blinker linear infinite;
+    -webkit-animation:1s blinker linear infinite;
+    -moz-animation:1s blinker linear infinite;
+}
+
+@-moz-keyframes blinker {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blinker {
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+#time {
+    /* border-style:solid;
+    border-color:#287EC7;
+    background-color:#ffffff; */
+    text-align:center;
+}
+
+#weather {
+    /* border-style:solid;
+    border-color:#287EC7;
+    background-color:#41f4f1; */
+    text-align:center;
+}
+
+#traintime {
+    /* border-style:solid;
+    border-color:#287EC7; */
+    background-color:#74f441;
+    text-align:center;
+}
+
+#traintimenext {
+    /* border-style:solid;
+    border-color:#287EC7; */
+    background-color:#74f441;
+    text-align:center;
+}
+
+#usd {
+    /* border-style:solid;
+    border-color:#287EC7; */
+    background-color:#f4df42;
+    text-align:center;
+}
+
+#eur {
+    /* border-style:solid;
+    border-color:#287EC7; */
+    background-color:#f4df42;
+    text-align:center;
+}
+
+td.big {
+    line-height: 200%;
+}
