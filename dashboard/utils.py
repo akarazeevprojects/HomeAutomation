@@ -29,26 +29,29 @@ def check_date(date):
 
 def get_trains(date, thresholdmins=15):
     global departures
-   
+
     equal_dates = compare_dates(date, saved_date)
- 
+
     if departures is None or not equal_dates:
         datestr = date.strftime("%Y-%m-%d")
         print("==DATE==")
         print(date)
         URL = "https://api.rasp.yandex.net/v3.0/search/?apikey=57f7ab5c-05ca-4f02-a9af-61c71b46dbb6&format=json&from=s9600766&to=s9601830&lang=ru_RU&page=1&date={}".format(datestr)
         print(URL)
-        
-        r = requests.get(url=URL)
-        data = r.json()
-        segments = data['segments']
-        segments = list(filter(lambda x: x['thread']['express_type'] != 'express', segments))
 
-        departures = list()
-        for i in segments:
-            deptime = i['departure'][:-6]
-            deptime = datetime.datetime.strptime(deptime, "%Y-%m-%dT%H:%M:%S")
-            departures.append(deptime)
+        try:
+            r = requests.get(url=URL)
+            data = r.json()
+            segments = data['segments']
+            segments = list(filter(lambda x: x['thread']['express_type'] != 'express', segments))
+
+            departures = list()
+            for i in segments:
+                deptime = i['departure'][:-6]
+                deptime = datetime.datetime.strptime(deptime, "%Y-%m-%dT%H:%M:%S")
+                departures.append(deptime)
+        except Exception as e:
+            print('--Failed--')
 
     trains = list()
 
