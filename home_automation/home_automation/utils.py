@@ -1,13 +1,13 @@
-import subprocess
 import emoji
 import json
 import os
+import requests
 
-from home_automation import system, switcher
+from home_automation import system
 
 
 def get_publicurl():
-    os.system("curl  http://localhost:4040/api/tunnels > /home/pi/tunnels.json")
+    os.system("curl http://localhost:4040/api/tunnels > /home/pi/tunnels.json")
 
     with open('/home/pi/tunnels.json') as data_file:
         datajson = json.load(data_file)
@@ -15,7 +15,7 @@ def get_publicurl():
     msg = "ngrok URL: "
 
     for i in datajson['tunnels']:
-        msg = msg + i['public_url'] +'\n'
+        msg = msg + i['public_url'] + '\n'
 
     return msg
 
@@ -42,18 +42,26 @@ def get_aliases():
 def compose_state():
     text = list()
     for full_name in system.alias_mapping:
-        alias = system.alias_mapping[full_name]
-        switch_command = '{}{}'.format(system.SWITCH, alias)
+        device = system.alias_mapping[full_name]
+        switch_command = '{}{}'.format(system.SWITCH, device)
 
-        state = switcher.get_state(alias)
-        print(alias, state)
+        r = requests.get('http://localhost:5000/state/{}'.format(device))
+        content = r.content.decode()
+        if content == 'ON':
+            state = 1
+        elif content == 'OFF':
+            state = 0
+        else:
+            raise Exception
+
+        print(device, state)
 
         if state == 0:
             # Turned off.
             state = ':electric_plug:'
         else:
             # Turned on.
-            if 'fan' in alias:
+            if 'fan' in device:
                 state = ':dash:'
             else:
                 state = ':bulb:'
@@ -67,33 +75,3 @@ def compose_state():
 
     text = '\n'.join(text)
     return text
-
-
-def switch(alias):
-    state = switcher.get_state(alias)
-    if state == 0:
-        # Turned off.
-        switcher.turn_on(alias)
-    else:
-        # Turned on.
-        switcher.turn_off(alias)
-
-
-def main():
-    # states = get_states()
-    # print(states)
-
-    # temp = get_temperature()
-    # print(temp)
-
-    # aliases = list(switcher.gpio_mapping.keys())
-    # print(aliases)
-
-    # state = compose_state()
-    # print(state)
-
-    pass
-
-
-if __name__ == '__main__':
-    main()

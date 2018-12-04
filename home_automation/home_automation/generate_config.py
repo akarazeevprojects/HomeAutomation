@@ -32,9 +32,9 @@ def generate_newconfig():
         alias = system.alias_mapping[fullname]
         struct = {
             "name": fullname,
-            "on_cmd": "python3 {} -d {} -on".format(system.SWITCHER_PATH, alias),
-            "off_cmd": "python3 {} -d {} -off".format(system.SWITCHER_PATH, alias),
-            "state_cmd": "python3 {} -d {} -s".format(system.SWITCHER_PATH, alias)
+            "on_cmd": "python3 {} -d {} -on".format(system.ADAPTER_PATH, alias),
+            "off_cmd": "python3 {} -d {} -off".format(system.ADAPTER_PATH, alias),
+            "state_cmd": "python3 {} -d {} -s".format(system.ADAPTER_PATH, alias)
         }
         cmdSwitch2["switches"].append(struct)
     template_config["platforms"].append(cmdSwitch2)
