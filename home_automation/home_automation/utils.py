@@ -7,15 +7,9 @@ from home_automation import system
 
 
 def get_publicurl():
-    os.system("curl http://localhost:4040/api/tunnels > /home/pi/tunnels.json")
-
-    with open('/home/pi/tunnels.json') as data_file:
-        datajson = json.load(data_file)
-
     msg = "ngrok URL: "
 
-    for i in datajson['tunnels']:
-        msg = msg + i['public_url'] + '\n'
+    msg = msg + json.loads(requests.get('http://localhost:4040/api/tunnels').content.decode())['tunnels'][0]['public_url'] + '\n'
 
     return msg
 
@@ -28,9 +22,7 @@ def get_config():
 
 
 def get_temperature():
-    with open(system.TEMPERATURE_PATH, 'r') as f:
-        temp = f.read()
-
+    temp = json.loads(requests.get('http://localhost:5000/temperature/cpu').content.decode())['temperature']
     return temp
 
 
