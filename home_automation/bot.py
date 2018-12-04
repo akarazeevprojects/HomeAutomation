@@ -44,9 +44,9 @@ def text_handler(bot, update):
 @general
 def command_handler(bot, update):
     text = update.message.text
-    alias = re.sub(r'{}*'.format(system.SWITCH), '', text)
-    # Switch `alias` device.
-    utils.switch(alias)
+    device = re.sub(r'{}*'.format(system.SWITCH), '', text)
+    # Switch `device` state.
+    requests.get('http://localhost:5000/switch/{}'.format(device))
 
 
 def url_command(bot, update):
@@ -57,13 +57,14 @@ def url_command(bot, update):
 def make_photo(bot, update):
     filename = "/home/pi/photo.jpeg"
     r = requests.get('http://192.168.0.8:5000/get_image')
-    
+
     if r.status_code == 200:
         with open(filename, 'wb') as f:
             f.write(r.content)
 
     with open(filename, "rb") as f:
         update.message.reply_photo(photo=f)
+
 
 def run():
     token = get_token()
