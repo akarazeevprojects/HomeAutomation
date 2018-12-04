@@ -1,6 +1,7 @@
-from flask import Flask
+from flask import Flask, jsonify
 from home_automation import system
 import platform
+import subprocess
 
 RPI = True
 if platform.system() == 'Darwin':
@@ -44,6 +45,14 @@ def fail_message():
 @app.route('/')
 def hello_world():
     return "HomeAutomation project"
+
+
+@app.route('/temperature/cpu')
+def temperature_cpu():
+    p = subprocess.Popen(['vcgencmd', 'measure_temp'], stdout=subprocess.PIPE)
+    out, err = p.communicate()
+    out = str(out)[7:-5]
+    return jsonify(temperature=out)
 
 
 @app.route('/state/<device>')
