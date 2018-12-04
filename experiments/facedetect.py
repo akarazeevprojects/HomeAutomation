@@ -16,7 +16,7 @@ def main():
         if info == 'Face detected':
             p = subprocess.Popen(['python3 /home/pi/HomeAutomation/home_automation/switcher.py -d llamp -on'], shell=True, stdout=subprocess.PIPE)
             out, err = p.communicate()
-            time.sleep(60)
+            time.sleep(600)
         else:
             p = subprocess.Popen(['python3 /home/pi/HomeAutomation/home_automation/switcher.py -d llamp -off'], shell=True, stdout=subprocess.PIPE)
             out, err = p.communicate()
