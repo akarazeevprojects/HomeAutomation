@@ -39,7 +39,7 @@ def compose_state():
     for full_name, device in mapping.items():
         switch_command = '{}{}'.format(SWITCH, device)
 
-        state = emo_state(states[device], device)
+        state = emo_state(states[full_name], device)
 
         to_append = '{} - {} - {}'.format(full_name, state, switch_command)
         to_append = emoji.emojize(to_append, use_aliases=True)
