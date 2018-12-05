@@ -16,10 +16,9 @@ def generate_newconfig():
         template_config = json.load(f)
 
     TemperatureFile = {
-        "accessory": "TemperatureFile",
-        "name": "Temperature-sensor",
-        "description": "The temperature of Raspberry Pi",
-        "file_path": system.TEMPERATURE_PATH
+        "accessory": "HttpTemperature",
+        "name": "RPi Temperature",
+        "url": "http://localhost:5000/temperature/cpu"
     }
     template_config['accessories'].append(TemperatureFile)
 

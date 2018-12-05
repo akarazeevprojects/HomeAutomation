@@ -5,7 +5,7 @@ import json
 import re
 import requests
 
-from home_automation import utils, system
+import utils
 
 # Enable logging.
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - \
@@ -16,7 +16,7 @@ logger.setLevel(logging.INFO)
 
 
 def get_token():
-    with open(system.TGTOKEN_PATH) as jsn:
+    with open(utils.TGTOKEN_PATH) as jsn:
         data = json.load(jsn)
     return data['token']
 
@@ -44,7 +44,7 @@ def text_handler(bot, update):
 @general
 def command_handler(bot, update):
     text = update.message.text
-    device = re.sub(r'{}*'.format(system.SWITCH), '', text)
+    device = re.sub(r'{}*'.format(utils.SWITCH), '', text)
     # Switch `device` state.
     requests.get('http://localhost:5000/switch/{}'.format(device))
 

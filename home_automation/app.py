@@ -1,5 +1,4 @@
 from flask import Flask, jsonify
-from home_automation import system
 import platform
 import subprocess
 
@@ -8,7 +7,9 @@ if platform.system() == 'Darwin':
     RPI = False
 
 if RPI:
-    from home_automation import switcher
+    from home_automation import system, switcher
+else:
+    from home_automation import system
 
 
 class Home:
@@ -16,9 +17,18 @@ class Home:
         devices = list(system.gpio_mapping.keys())
         zeros = [0] * len(devices)
         self.device_states = dict(zip(devices, zeros))
+        self.mapping = system.alias_mapping
 
     def get_state(self, device):
         return self.device_states[device]
+
+    def get_states_full(self):
+        res = dict()
+
+        for full_name, alias in self.mapping.items():
+            res[full_name] = self.get_state(alias)
+
+        return res
 
     def set_state(self, device, state):
         self.device_states[device] = state
@@ -67,6 +77,26 @@ def get_state(device):
             return 'ON'
     except KeyError:
         return fail_message_device(device)
+    except Exception:
+        return fail_message()
+
+
+@app.route('/states')
+def get_states():
+    global home
+
+    try:
+        return jsonify(home.get_states_full())
+    except Exception:
+        return fail_message()
+
+
+@app.route('/mapping')
+def get_mapping():
+    global home
+
+    try:
+        return jsonify(home.mapping)
     except Exception:
         return fail_message()
 
@@ -120,4 +150,4 @@ def turn_off(device):
 if __name__ == '__main__':
     if RPI:
         switcher.setup_pins()
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', debug=True, port=5000)
