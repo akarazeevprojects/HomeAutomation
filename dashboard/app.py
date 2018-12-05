@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, jsonify, render_template
 from flask_socketio import SocketIO
 from threading import Lock
 import datetime
@@ -16,9 +16,11 @@ socketio = SocketIO(app, logger=False, engineio_logger=False, async_mode=None)
 thread = None
 thread_lock = Lock()
 
+data = None
 
 def background_thread():
     """Example of how to send server generated events to clients."""
+    global data
     while True:
         socketio.sleep(0.1)
 
@@ -41,6 +43,9 @@ def background_thread():
         check_date(now)
         socketio.emit('my_response', data=data, namespace='/test')
 
+@app.route('/data')
+def get_data():
+    return jsonify(data)
 
 @app.route('/')
 def index():
