@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+import requests
 
 from home_automation import system
 
@@ -13,10 +14,20 @@ def setup_pins():
 
 
 def turn_on(device):
-    pin = system.gpio_mapping[device]
-    GPIO.output(pin, 1)
+    if device == "ledstrip":
+        requests.get("http://192.168.0.24:81/RELAY=ON")
+    elif device == "smartclock":
+        requests.get("http://192.168.0.24:81/OLED=ON")
+    else:
+        pin = system.gpio_mapping[device]
+        GPIO.output(pin, 1)
 
 
 def turn_off(device):
-    pin = system.gpio_mapping[device]
-    GPIO.output(pin, 0)
+    if device == "ledstrip":
+        requests.get("http://192.168.0.24:81/RELAY=OFF")
+    elif device == "smartclock":
+        requests.get("http://192.168.0.24:81/OLED=OFF")
+    else:
+        pin = system.gpio_mapping[device]
+        GPIO.output(pin, 0)
