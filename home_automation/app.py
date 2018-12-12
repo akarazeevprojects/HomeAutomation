@@ -17,6 +17,8 @@ class Home:
         devices = list(system.gpio_mapping.keys())
         zeros = [0] * len(devices)
         self.device_states = dict(zip(devices, zeros))
+        self.device_states["ledstrip"] = 0
+        self.device_states["smartclock"] = 0
         self.mapping = system.alias_mapping
 
     def get_state(self, device):

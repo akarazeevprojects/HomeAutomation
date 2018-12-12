@@ -25,6 +25,7 @@ def get_state_returncode(device):
     elif content == 'OFF':
         state = 0
     else:
+        print(content)
         raise Exception
 
     if state == 0:
