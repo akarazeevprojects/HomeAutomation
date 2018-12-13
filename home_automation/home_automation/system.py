@@ -1,5 +1,6 @@
 import requests
 import platform
+import logging
 
 RPI = True
 if platform.system() == "Darwin":
@@ -61,6 +62,16 @@ class Home:
         if RPI:
             self._setup_pins()
 
+        # Initialize logger for data collection.
+        logger = logging.getLogger('actions')
+        logger.setLevel(logging.DEBUG)
+        fh = logging.FileHandler('actions.log')
+        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        fh.setFormatter(formatter)
+        logger.addHandler(fh)
+
+        self.logger = logger
+
     def _setup_pins(self):
         pins = [x["pin"] for x in devices.values() if x["type"] == "switch"]
         for pin in pins:
@@ -76,6 +87,8 @@ class Home:
             pin = devices[fullname]["pin"]
             GPIO.output(pin, 1)
 
+        self.logger.info('{} {}'.format(device, 'ON'))
+
     def _turn_off(self, device):
         fullname = self.name_to_fullname[device]
 
@@ -85,6 +98,8 @@ class Home:
         elif devices[fullname]["type"] == "switch":
             pin = devices[fullname]["pin"]
             GPIO.output(pin, 0)
+
+        self.logger.info('{} {}'.format(device, 'OFF'))
 
     def exists(self, device):
         return device in self.device_states
