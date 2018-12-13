@@ -48,6 +48,9 @@ class Home:
         self.name_to_fullname = dict(
             [(info["name"], fullname) for fullname, info in devices.items()]
         )
+        self.fullname_to_name = dict(
+            [(fullname, info["name"]) for fullname, info in devices.items()]
+        )
 
         if RPI:
             self._setup_pins()

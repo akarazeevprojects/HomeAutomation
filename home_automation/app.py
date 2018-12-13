@@ -60,7 +60,7 @@ def get_mapping():
     global home
 
     try:
-        return jsonify(home.name_to_fullname)
+        return jsonify(home.fullname_to_name)
     except Exception:
         return fail_message()
 

@@ -29,7 +29,7 @@ def generate_newconfig():
 
     cmdSwitch2 = {"platform": "cmdSwitch2", "switches": list()}
 
-    for fullname, info in system.devices:
+    for fullname, info in system.devices.items():
         name = info["name"]
         struct = {
             "name": fullname,
