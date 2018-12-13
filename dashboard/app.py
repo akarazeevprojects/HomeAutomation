@@ -27,13 +27,14 @@ def background_thread():
         now = datetime.datetime.now()
         nowstr = now.strftime("%H:%M:%S")
 
-        weather = get_weather(now)
+        weather, temp = get_weather(now)
         trains = get_trains(now, 10)
         exchange = get_exchange()
 
         data = dict(
             time=nowstr,
             weather=weather,
+            temp=temp,
             traintime=trains[0],
             traintimenext=trains[1],
             usd=exchange['usd'],

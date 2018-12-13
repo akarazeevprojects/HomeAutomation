@@ -6,6 +6,7 @@ import datetime
 
 SHORT_FLOAT_STR = "{:.2f}"
 WEATHER_STR = "{}, {}/{}"
+TEMP_STR = "{}/{}"
 TIME_STR = "{:02d}:{:02d}"
 ELLIPSIS = "..."
 
@@ -100,8 +101,9 @@ def get_weather(date):
         weather_forecast = {'text': '-1', "high": "-1", "low": '-1'}
 
     weather_string = WEATHER_STR.format(weather_forecast['text'], weather_forecast['high'], weather_forecast['low'])
+    temp_string = TEMP_STR.format(weather_forecast['high'], weather_forecast['low'])
 
-    return weather_string
+    return weather_string, temp_string
 
 
 def get_exchange():
