@@ -46,7 +46,7 @@ def command_handler(bot, update):
     text = update.message.text
     device = re.sub(r'{}*'.format(utils.SWITCH), '', text)
     # Switch `device` state.
-    requests.get('http://localhost:5000/switch/{}'.format(device))
+    requests.get('{}:5000/switch/{}'.format(utils.MAIN_URL, device))
 
 
 def url_command(bot, update):
