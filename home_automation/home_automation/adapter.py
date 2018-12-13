@@ -5,24 +5,24 @@ import logging
 
 
 def turn_on(device):
-    requests.get('http://localhost:5000/on/{}'.format(device))
+    requests.get("http://localhost:5000/on/{}".format(device))
 
 
 def turn_off(device):
-    requests.get('http://localhost:5000/off/{}'.format(device))
+    requests.get("http://localhost:5000/off/{}".format(device))
 
 
 def switch(device):
-    requests.get('http://localhost:5000/switch/{}'.format(device))
+    requests.get("http://localhost:5000/switch/{}".format(device))
 
 
 def get_state_returncode(device):
-    r = requests.get('http://localhost:5000/state/{}'.format(device))
+    r = requests.get("http://localhost:5000/state/{}".format(device))
     content = r.content.decode()
 
-    if content == 'ON':
+    if content == "ON":
         state = 1
-    elif content == 'OFF':
+    elif content == "OFF":
         state = 0
     else:
         print(content)
@@ -43,7 +43,9 @@ def perform_action(args):
 
 def build_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-v", "--verbose", help="increase output verbosity", action="store_true")
+    parser.add_argument(
+        "-v", "--verbose", help="increase output verbosity", action="store_true"
+    )
     parser.add_argument("-d", "--device", help="device id")
     parser.add_argument("-on", "--on", help="switch on device", action="store_true")
     parser.add_argument("-off", "--off", help="switch off device", action="store_true")
@@ -63,5 +65,5 @@ def main():
     perform_action(args)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
