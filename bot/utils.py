@@ -3,7 +3,7 @@ import json
 import requests
 
 SWITCH = '/switch\_'
-TGTOKEN_PATH = '/home/pi/HomeAutomation/res/token.json'
+TGTOKEN_PATH = '/home/sams/HomeAutomation/res/token.json'
 
 # MAIN_URL = 'http://localhost'
 MAIN_URL = 'http://192.168.0.111'
