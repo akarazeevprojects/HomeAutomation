@@ -31,6 +31,12 @@ devices = {
         "onURL": "http://192.168.0.24:81/RELAY=ON",
         "offURL": "http://192.168.0.24:81/RELAY=OFF",
     },
+    "Kitchen LED": {
+        "type": "httpswitch",
+        "name": "kitchenled",
+        "onURL": "http://192.168.0.18/LED=ON",
+        "offURL": "http://192.168.0.18/LED=OFF"
+    },
     "Smart Clock": {
         "type": "httpswitch",
         "name": "smartclock",
