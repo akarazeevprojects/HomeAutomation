@@ -5,14 +5,16 @@ import requests
 SWITCH = '/switch\_'
 TGTOKEN_PATH = '/home/pi/HomeAutomation/res/token.json'
 
+# MAIN_URL = 'http://localhost'
+MAIN_URL = 'http://192.168.0.111'
 
 def get_publicurl():
-    msg = "ngrok URL: " + json.loads(requests.get('http://localhost:4040/api/tunnels').content.decode())['tunnels'][0]['public_url'] + '\n'
+    msg = "ngrok URL: " + json.loads(requests.get('{}:4040/api/tunnels'.format(MAIN_URL)).content.decode())['tunnels'][0]['public_url'] + '\n'
     return msg
 
 
 def get_temperature():
-    temp = json.loads(requests.get('http://localhost:5000/temperature/cpu').content.decode())['temperature']
+    temp = json.loads(requests.get('{}:5000/temperature/cpu'.format(MAIN_URL)).content.decode())['temperature']
     return temp
 
 
@@ -33,8 +35,8 @@ def emo_state(state, device):
 def compose_state():
     text = list()
 
-    mapping = json.loads(requests.get('http://localhost:5000/mapping').content.decode())
-    states = json.loads(requests.get('http://localhost:5000/states').content.decode())
+    mapping = json.loads(requests.get('{}:5000/mapping'.format(MAIN_URL)).content.decode())
+    states = json.loads(requests.get('{}:5000/states'.format(MAIN_URL)).content.decode())
 
     for full_name, device in mapping.items():
         switch_command = '{}{}'.format(SWITCH, device)
