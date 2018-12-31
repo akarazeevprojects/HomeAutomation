@@ -35,8 +35,8 @@ devices = {
     "Kitchen LED": {
         "type": "httpswitch",
         "name": "kitchenled",
-        "onURL": "http://192.168.0.18/LED=ON",
-        "offURL": "http://192.168.0.18/LED=OFF"
+        "onURL": "http://192.168.0.6/LED=ON",
+        "offURL": "http://192.168.0.6/LED=OFF"
     },
     "Smart Clock": {
         "type": "httpswitch",
