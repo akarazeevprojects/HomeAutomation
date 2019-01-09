@@ -98,7 +98,7 @@ def get_weather(date):
                 text=location.forecast[0].text
             )
     except Exception as e:
-        weather_forecast = {'text': '-1', "high": "-1", "low": '-1'}
+        weather_forecast = {'text': '404', "high": "404", "low": '404'}
 
     weather_string = WEATHER_STR.format(weather_forecast['text'], weather_forecast['high'], weather_forecast['low'])
     temp_string = TEMP_STR.format(weather_forecast['high'], weather_forecast['low'])
