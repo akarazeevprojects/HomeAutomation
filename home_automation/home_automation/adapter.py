@@ -3,21 +3,24 @@ import requests
 import sys
 import logging
 
+IP = "192.168.0.111"
+PORT = "5000"
+
 
 def turn_on(device):
-    requests.get("http://localhost:5000/on/{}".format(device))
+    requests.get("http://{}:{}/on/{}".format(IP, PORT, device))
 
 
 def turn_off(device):
-    requests.get("http://localhost:5000/off/{}".format(device))
+    requests.get("http://{}:{}/off/{}".format(IP, PORT, device))
 
 
 def switch(device):
-    requests.get("http://localhost:5000/switch/{}".format(device))
+    requests.get("http://{}:{}/switch/{}".format(IP, PORT, device))
 
 
 def get_state_returncode(device):
-    r = requests.get("http://localhost:5000/state/{}".format(device))
+    r = requests.get("http://{}:{}/state/{}".format(IP, PORT, device))
     content = r.content.decode()
 
     if content == "ON":

@@ -44,6 +44,12 @@ devices = {
         "onURL": "http://192.168.0.24:81/OLED=ON",
         "offURL": "http://192.168.0.24:81/OLED=OFF",
     },
+    "Office Ceiling Light": {
+        "type": "httpswitch",
+        "name": "officeceilinglight",
+        "onURL": "http://192.168.0.23/LED=ON",
+        "offURL": "http://192.168.0.23/LED=OFF"
+    }
 }
 
 
