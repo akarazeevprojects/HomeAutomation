@@ -1,5 +1,5 @@
 from forex_python.converter import CurrencyRates
-from weather import Weather, Unit
+# from weather import Weather, Unit
 import requests
 import datetime
 
