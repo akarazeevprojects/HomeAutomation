@@ -13,7 +13,7 @@ itsdangerous==1.1.0
 jinja2>=2.10
 markupsafe==1.1.0
 monotonic==1.5
-python-engineio==2.3.2
+python-engineio>=2.3.2
 python-socketio==2.0.0
 requests==2.20.1
 simplejson==3.16.0
