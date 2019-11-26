@@ -6,7 +6,13 @@
 		"pin": "033-44-254"
 	},
 	"description": "This is configuration file by akarazeev",
-	"accessories": [],
+	"accessories": [
+		{
+            "accessory": "HttpTemperature",
+            "name": "RPi Temperature",
+            "url": "http://192.168.0.111:5000/temperature/cpu"
+        }
+	],
 	"platforms": [
 		{
 			"platform": "cmdSwitch2",
