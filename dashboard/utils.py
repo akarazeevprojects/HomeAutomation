@@ -1,5 +1,5 @@
 from forex_python.converter import CurrencyRates
-from weather import Weather, Unit
+# from weather import Weather, Unit
 import requests
 import datetime
 
@@ -87,18 +87,31 @@ def get_weather(date):
 
     try:
         if weather_forecast is None or not equal_dates:
-            weather = Weather(unit=Unit.CELSIUS)
-            location = weather.lookup_by_location('Dolgoprudny')
+            # weather = Weather(unit=Unit.CELSIUS)
+            # location = weather.lookup_by_location('Dolgoprudny')
+            #
+            # weather_forecast = dict(
+            #     temp=location.condition.temp,
+            #     date=location.forecast[0].date,
+            #     high=location.forecast[0].high,
+            #     low=location.forecast[0].low,
+            #     text=location.forecast[0].text
+            # )
+
+            URL = "http://api.openweathermap.org/data/2.5/weather?q=Dolgoprudny&units=metric&APPID=4588c7b93930a8f20c63e7c7aa6e4cd8"
+            r = requests.get(url=URL)
+            data = r.json()
+            print(data)
 
             weather_forecast = dict(
-                temp=location.condition.temp,
-                date=location.forecast[0].date,
-                high=location.forecast[0].high,
-                low=location.forecast[0].low,
-                text=location.forecast[0].text
+                temp=data['main']['temp'],
+                high=data['main']['temp_max'],
+                low=data['main']['temp_min'],
+                text=data['weather'][0]['main']
             )
+
     except Exception as e:
-        weather_forecast = {'text': '-1', "high": "-1", "low": '-1'}
+        weather_forecast = {'text': '404', "high": "404", "low": '404'}
 
     weather_string = WEATHER_STR.format(weather_forecast['text'], weather_forecast['high'], weather_forecast['low'])
     temp_string = TEMP_STR.format(weather_forecast['high'], weather_forecast['low'])
