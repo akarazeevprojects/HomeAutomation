@@ -12,8 +12,15 @@ First of all you need to install `homebridge` on your machine (Raspberry Pi) alo
 
 Then you need to configure your home automation system inside the `system.py` file.
 
-After that just generate new `config.json` and replace `~/.homebridge/config.json` with newly generated `newconfig.json`:
+Used plugins:
+
+```bash
+npm install -g homebridge-cmdswitch2
+npm install -g homebridge-http-temperature
 ```
+
+After that just generate new `config.json` and replace `~/.homebridge/config.json` with newly generated `newconfig.json`:
+```bash
 python home_automation/generate_config.py -r
 ```
 
