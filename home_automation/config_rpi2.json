@@ -1,0 +1,85 @@
+{
+    "accessories": [
+        {
+            "accessory": "HttpTemperature",
+            "name": "RPi Temperature",
+            "url": "http://localhost:5000/temperature/cpu"
+        }
+    ],
+    "bridge": {
+        "name": "iHome",
+        "pin": "031-46-154",
+        "port": 51816,
+        "username": "CC:22:3D:E3:CE:30"
+    },
+    "description": "This is configuration file by akarazeev",
+    "platforms": [
+        {
+            "platform": "cmdSwitch2",
+            "switches": [
+                {
+                    "name": "Neon",
+                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d neon -off",
+                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d neon -on",
+                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d neon -s"
+                },
+                {
+                    "name": "Left lamp",
+                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d llamp -off",
+                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d llamp -on",
+                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d llamp -s"
+                },
+                {
+                    "name": "Kitchen LED",
+                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d kitchenled -off",
+                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d kitchenled -on",
+                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d kitchenled -s"
+                },
+                {
+                    "name": "Office Ceiling Light",
+                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d officeceilinglight -off",
+                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d officeceilinglight -on",
+                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d officeceilinglight -s"
+                },
+                {
+                    "name": "Fan",
+                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d fan -off",
+                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d fan -on",
+                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d fan -s"
+                },
+                {
+                    "name": "Right lamp",
+                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d rlamp -off",
+                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d rlamp -on",
+                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d rlamp -s"
+                },
+                {
+                    "name": "Smart Clock",
+                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d smartclock -off",
+                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d smartclock -on",
+                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d smartclock -s"
+                },
+                {
+                    "name": "LED Strip",
+                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d ledstrip -off",
+                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d ledstrip -on",
+                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d ledstrip -s"
+                }
+            ]
+        },
+        {
+            "platform": "HttpWebHooks",
+            "webhook_port": "51828",
+            "switches": [
+                {
+                    "id": "switch1",
+                    "name": "ESP8266 Switch"
+                },
+                {
+                    "id": "switch2",
+                    "name": "WeMos Switch"
+                }
+            ]
+        }
+    ]
+}
