@@ -7,13 +7,23 @@
 	},
 	"description": "This is configuration file by akarazeev",
 	"accessories": [],
-	"platforms": [{
-		"platform": "cmdSwitch2",
-		"switches": [{
-			"name": "Neon",
-			"off_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d neon -off",
-			"on_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d neon -on",
-			"state_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d neon -s"
-		}]
-	}]
+	"platforms": [
+		{
+			"platform": "cmdSwitch2",
+			"switches": [
+				{
+					"name": "Neon",
+					"off_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d neon -off",
+					"on_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d neon -on",
+					"state_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d neon -s"
+				},
+				{
+					"name": "Left lamp",
+					"off_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d llamp -off",
+					"on_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d llamp -on",
+					"state_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d llamp -s"
+				}
+			]
+		}
+	]
 }
