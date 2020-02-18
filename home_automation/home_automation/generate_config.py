@@ -23,7 +23,7 @@ def generate_newconfig():
     TemperatureFile = {
         "accessory": "HttpTemperature",
         "name": "RPi Temperature",
-        "url": "http://localhost:5000/temperature/cpu",
+        "url": "http://192.168.0.111:5000/temperature/cpu",
     }
     template_config["accessories"].append(TemperatureFile)
 

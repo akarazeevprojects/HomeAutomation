@@ -13,7 +13,8 @@ if RPI:
     GPIO.setwarnings(False)
 
 # Interaction.
-ADAPTER_PATH = "/home/pi/HomeAutomation/home_automation/home_automation/adapter.py"
+# ADAPTER_PATH = "/home/pi/HomeAutomation/home_automation/home_automation/adapter.py"
+ADAPTER_PATH = "/Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py"
 
 # Configs.
 NEWCONFIG_PATH = "/home/pi/HomeAutomation/home_automation/res/newconfig.json"
@@ -22,7 +23,7 @@ CONFIG_PATH = "/home/pi/.homebridge/config.json"
 
 # Supported types of devices: `switch`, `httpswitch`.
 devices = {
-    "Fan": {"type": "switch", "name": "fan", "pin": 24},
+    "5s": {"type": "switch", "name": "5s", "pin": 24},
     "Right lamp": {"type": "switch", "name": "rlamp", "pin": 18},
     "Left lamp": {"type": "switch", "name": "llamp", "pin": 23},
     "Neon": {"type": "switch", "name": "neon", "pin": 15},

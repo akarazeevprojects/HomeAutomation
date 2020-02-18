@@ -3,7 +3,7 @@
         {
             "accessory": "HttpTemperature",
             "name": "RPi Temperature",
-            "url": "http://localhost:5000/temperature/cpu"
+            "url": "http://192.168.0.111:5000/temperature/cpu"
         }
     ],
     "bridge": {
@@ -18,46 +18,34 @@
             "platform": "cmdSwitch2",
             "switches": [
                 {
-                    "name": "Neon",
-                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d neon -off",
-                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d neon -on",
-                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d neon -s"
-                },
-                {
-                    "name": "Left lamp",
-                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d llamp -off",
-                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d llamp -on",
-                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d llamp -s"
-                },
-                {
-                    "name": "Kitchen LED",
-                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d kitchenled -off",
-                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d kitchenled -on",
-                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d kitchenled -s"
-                },
-                {
-                    "name": "Fan",
-                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d fan -off",
-                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d fan -on",
-                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d fan -s"
+                    "name": "5s",
+                    "off_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d 5s -off",
+                    "on_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d 5s -on",
+                    "state_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d 5s -s"
                 },
                 {
                     "name": "Right lamp",
-                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d rlamp -off",
-                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d rlamp -on",
-                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d rlamp -s"
+                    "off_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d rlamp -off",
+                    "on_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d rlamp -on",
+                    "state_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d rlamp -s"
                 },
                 {
-                    "name": "Smart Clock",
-                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d smartclock -off",
-                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d smartclock -on",
-                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d smartclock -s"
+                    "name": "Left lamp",
+                    "off_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d llamp -off",
+                    "on_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d llamp -on",
+                    "state_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d llamp -s"
+                },
+                {
+                    "name": "Neon",
+                    "off_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d neon -off",
+                    "on_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d neon -on",
+                    "state_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d neon -s"
                 },
                 {
                     "name": "LED Strip",
-                    "off_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d ledstrip -off",
-                    "on_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d ledstrip -on",
-                    "state_cmd": "python3 /home/pi/HomeAutomation/home_automation/home_automation/adapter.py -d ledstrip -s"
+                    "off_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d ledstrip -off",
+                    "on_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d ledstrip -on",
+                    "state_cmd": "python3 /Volumes/Macintosh\\ SSD/akarazeev/wd/HomeAutomation/home_automation/home_automation/adapter.py -d ledstrip -s"
                 }
             ]
         }
