@@ -16,5 +16,5 @@ PySocks==1.6.8
 python-telegram-bot==11.1.0
 requests==2.20.1
 six==1.11.0
-urllib3==1.25.7
+urllib3==1.25.8
 Werkzeug>=0.15.3
