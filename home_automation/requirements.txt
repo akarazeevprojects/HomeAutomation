@@ -17,5 +17,5 @@ python-telegram-bot==11.1.0
 requests==2.20.1
 RPi.GPIO==0.6.4
 six==1.11.0
-urllib3==1.25.7
+urllib3==1.26.5
 Werkzeug==0.15.3
